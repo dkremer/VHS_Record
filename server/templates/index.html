@@ -56,6 +56,7 @@
           </button>
           <span id="time" class="time">00:00</span>
           <h5>Automatic Stop</h5>
+          <div style="display:none">
           <h6>Filter</h6>
           <input class="mdl-slider mdl-js-slider" type="range" min="0" max="150" value="{{ 10 * settings.filter_level}}" tabindex="0" id="filter_level">
           {% for label in labels %}
@@ -65,6 +66,7 @@
             </label>
             <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="{{ 100 * settings[label + '_level'] }}" tabindex="0" id="{{ label }}_level" {% if not settings[label + "_enable"] %}disabled{% endif %}>
           {% endfor %}
+          </div>
           <h6>Stop After</h6>
           <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="stop_after_enable" style="display: inline-block; width: 45px;">
             <input type="checkbox" id="stop_after_enable" class="mdl-switch__input" {% if settings["stop_after_enable"] %}checked{% endif %}>

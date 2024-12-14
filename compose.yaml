@@ -1,0 +1,21 @@
+services:
+  vhs-record:
+    image: dkremer55/vhs_record
+    environment:
+      ALSA_AUDIO: true
+      AUDIO_DEVICE: 2
+      INPUT_FMT: v4l2
+      V4L2_FMT: mjpeg
+      VIDEO_FILTER: yadif
+      V4L2_FPS: 30
+      V4L2_RES: 640x480
+      OUTPUT_RES: 640x480
+    ports: 
+      - 0.0.0.0:5000:5000
+    devices:
+      - /dev/video0:/dev/video0
+      - /dev/snd:/dev/snd
+    volumes:
+      - /home/dave/VHS_Record/data:/data
+      - /home/dave/VHS_Record/config:/config
+    restart: unless-stopped

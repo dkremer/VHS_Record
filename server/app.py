@@ -192,7 +192,7 @@ class VHS_Record:
                         else []
                     ),
                     "-i",
-                    "hw:" + self.env_settings["AUDIO_DEVICE"],
+                    "hw:" + subprocess.getoutput("arecord -l | grep 'USB Audio' | awk '{print substr($2, 1, 1)}'"),
                 )
             ),
             "-filter_complex",

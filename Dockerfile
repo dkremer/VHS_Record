@@ -16,6 +16,8 @@ RUN apt-get update && \
       libsndfile1-dev \
     	libgl1-mesa-glx \
       v4l-utils \
+      pciutils \
+      sudo \
     && apt-get clean
 ADD https://bootstrap.pypa.io/get-pip.py .
 RUN python3.8 get-pip.py && rm get-pip.py
@@ -25,6 +27,10 @@ RUN pip install \
       tflite-runtime \
       pillow \
       camerons-python
+RUN useradd -m -d /home/plex -s /bin/bash -g video -G audio -u 1001 plex
+RUN adduser plex sudo
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+USER plex
 COPY server /server
 
-CMD python3.8 server/app.py
+CMD ["python3.8", "server/app.py"]

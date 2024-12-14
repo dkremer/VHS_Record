@@ -1,13 +1,13 @@
 .PHONY: build run terminal push
 
 tag = latest
-user = camerondevine
+user = dkremer55
 image = vhs_record
 
 container = $(user)/$(image):$(tag)
 
 build:
-	sudo docker build -t $(container) .
+	docker build -t $(container) .
 
 video = video2
 audio = 1
@@ -23,4 +23,5 @@ terminal:
 	$(container_start) bash
 
 push:
-	sudo docker push $(container)
+	docker tag $(container) $(container)
+	docker push $(container
